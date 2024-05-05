@@ -1,12 +1,27 @@
 
 import { Link } from 'react-router-dom';
 import img from '../../assets/images/login/login.svg'
+import { useContext } from 'react';
+import { AuthContext } from '../../Provider/AuthProvider';
 
 const SignUp = () => {
 
+  const {createUser} = useContext(AuthContext);
+
     const handleSignUp = event =>{
         event.preventDefault();
-        
+        const form = event.target;
+        const email = form.email.value;
+        const password = form.password.value;
+        const confirmPassword = form.confirmPassword.value;
+        console.log(email, password, confirmPassword)
+
+        createUser(email, password)
+        .then(result => {
+          const user = result.user;
+          console.log(user)
+        })
+        .catch(error=> console.log(error))
       }
 
 
@@ -20,7 +35,7 @@ const SignUp = () => {
                
              </div>
              <div className="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-               <form className="card-body">
+               <div className="card-body">
                <h1 className="text-5xl font-bold">Sign Up!</h1>
 
                  <form onSubmit={handleSignUp}>
@@ -36,12 +51,12 @@ const SignUp = () => {
                    <label className="label">
                      <span className="label-text">Password</span>
                    </label>
-                   <input type="password" name='password' placeholder="password" className="input input-bordered" required />
+                   <input type="text" name='password' placeholder="password" className="input input-bordered" required />
 
                    <label className="label">
                      <span className="label-text">Confirm Password</span>
                    </label>
-                   <input type="text" name='onfirm password' placeholder="Confirm password" className="input input-bordered" required />
+                   <input type="text" name='confirmPassword' placeholder="Confirm password" className="input input-bordered" required />
                    <label className="label">
                      <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
                    </label>
@@ -57,7 +72,7 @@ const SignUp = () => {
 
                  <p>Already Have an Account? <span className='text-red-500 font-bold'><Link to='/login'><u>Sign In</u></Link></span></p>
 
-               </form>
+               </div>
              </div>
            </div>
         </div>

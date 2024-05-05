@@ -5,7 +5,7 @@ const Footer = () => {
   
     return (
         
-        <footer className="footer p-10 bg-slate-950 text-white text-base-content">
+        <footer className="footer w-full p-10 bg-slate-950 text-white text-base-content">
            <aside>
              <img src= {logo} alt="" />
              <p>ACME Industries Ltd.<br/>Providing reliable tech since 1992</p>
